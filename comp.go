@@ -16,7 +16,7 @@ import (
 
 // 교사가 주관하는 대회(리그전·토너먼트). 한 번에 하나만 진행한다.
 // 대진(Fixture)은 만들 때 전부 생성하고, 교사가 라운드를 시작하면 hub 가 경기를 연다.
-// 진행 상황은 exe 옆 competitions/<id>.json 에 저장해 서버를 다시 켜도 이어서 한다.
+// 진행 상황은 exe 옆 population-puyo-competitions/<id>.json 에 저장해 서버를 다시 켜도 이어서 한다.
 // Competition 의 메서드는 Hub.run() 고루틴 안에서만 호출된다(락 없음).
 
 type CompType string
@@ -421,7 +421,7 @@ func (c *Competition) entrantIndex(key string) int {
 
 // ── 저장 ────────────────────────────────────────────────────
 
-func compsDir() string { return filepath.Join(exeDir(), "competitions") }
+func compsDir() string { return filepath.Join(exeDir(), "population-puyo-competitions") }
 
 func saveCompetition(c *Competition) {
 	if err := os.MkdirAll(compsDir(), 0755); err != nil {

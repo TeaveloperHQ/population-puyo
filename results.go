@@ -14,7 +14,8 @@ import (
 	"time"
 )
 
-// 경기 결과는 exe 옆 results/<날짜>/<시각>-<경기id>.json 에 한 판씩 저장한다.
+// 경기 결과는 exe 옆 population-puyo-results/<날짜>/<시각>-<경기id>.json 에 한 판씩 저장한다.
+// 폴더 이름에 게임 이름을 붙인 건 포털에서 받은 여러 게임 exe 가 같은 폴더(다운로드)에 있어도 섞이지 않게.
 // 날짜 폴더라 "언제 어느 반이 했나"가 폴더 구조로 바로 보이고, 파일이라 백업·이관이 쉽다.
 
 type ResultPlayer struct {
@@ -40,7 +41,7 @@ type MatchResult struct {
 	Players    [2]ResultPlayer `json:"players"`
 }
 
-func resultsDir() string { return filepath.Join(exeDir(), "results") }
+func resultsDir() string { return filepath.Join(exeDir(), "population-puyo-results") }
 
 func buildResult(m *Match, finished time.Time) *MatchResult {
 	r := &MatchResult{

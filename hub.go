@@ -252,13 +252,13 @@ func (h *Hub) sendErr(p *Player, msg string) {
 // ── 메시지 ──────────────────────────────────────────────────
 
 type clientMsg struct {
-	T      string  `json:"t"`
-	Rules  Rules   `json:"rules"`
-	Code   string  `json:"code"`
-	To     string  `json:"to"`
-	From   string  `json:"from"`
-	Accept bool    `json:"accept"`
-	D      int     `json:"d"`
+	T      string `json:"t"`
+	Rules  Rules  `json:"rules"`
+	Code   string `json:"code"`
+	To     string `json:"to"`
+	From   string `json:"from"`
+	Accept bool   `json:"accept"`
+	D      int    `json:"d"`
 }
 
 func (h *Hub) onMessage(in inMsg) {
@@ -760,15 +760,15 @@ func (h *Hub) hostMsg() []byte {
 	sort.Slice(players, func(i, j int) bool { return players[i].Name < players[j].Name })
 
 	type hm struct {
-		ID    string        `json:"id"`
-		Names [2]string     `json:"names"`
-		Score [2]int        `json:"score"`
-		Phase phase         `json:"ph"`
-		TL    int           `json:"tl"`
+		ID    string          `json:"id"`
+		Names [2]string       `json:"names"`
+		Score [2]int          `json:"score"`
+		Phase phase           `json:"ph"`
+		TL    int             `json:"tl"`
 		Grids [2][BW * BH]int `json:"grids"`
 		Rules Rules           `json:"rules"`
-		Win   int           `json:"winner"`
-		Start int64         `json:"start"`
+		Win   int             `json:"winner"`
+		Start int64           `json:"start"`
 	}
 	matches := []hm{}
 	for _, m := range h.matches {
