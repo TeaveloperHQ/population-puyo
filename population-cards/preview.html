@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>인구 문제 카드 미리보기</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Gothic+A1:wght@500;700;800&display=swap">
+<link rel="stylesheet" href="tokens.css">
+<link rel="stylesheet" href="card.css">
+<style>
+  body { margin: 0; background: var(--pc-ground); color: var(--pc-ink); font-family: var(--pc-font-body); padding: 32px; }
+  h1 { font-family: var(--pc-font-display); font-weight: 400; font-size: 40px; margin: 0 0 8px; }
+  p { color: var(--pc-ink-muted); margin: 0 0 24px; }
+  .row { display: flex; gap: 24px; margin-bottom: 40px; flex-wrap: wrap; }
+  .row > div { width: 180px; text-align: center; font-weight: 700; color: var(--pc-ink-muted); }
+  .row .pc-card { margin-bottom: 10px; }
+  .grid { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 16px; max-width: 1100px; }
+</style>
+</head>
+<body>
+<h1>인구 문제 카드</h1>
+<p>아래 20장은 클릭하면 뒤집힙니다. (디자인 확인용)</p>
+<div class="row" id="states"></div>
+<div class="grid" id="board"></div>
+<script src="cards.js"></script>
+<script>
+  var c = PopCards.CARDS[0];
+  document.getElementById('states').innerHTML =
+    '<div>' + PopCards.cardHTML(c, { hidden: true }) + '덮개</div>' +
+    '<div>' + PopCards.cardHTML(c, { side: 'dev' }) + '선진국 면</div>' +
+    '<div>' + PopCards.cardHTML(c, { side: 'ing' }) + '개발도상국 면</div>';
+  var board = document.getElementById('board');
+  board.innerHTML = PopCards.deck().map(function (card, i) {
+    return PopCards.cardHTML(card, { index: i, side: i % 2 ? 'ing' : 'dev' });
+  }).join('');
+  board.addEventListener('click', function (e) {
+    var el = e.target.closest('.pc-card'); if (!el) return;
+    PopCards.setSide(el, el.dataset.side === 'dev' ? 'ing' : 'dev');
+  });
+</script>
+</body>
+</html>

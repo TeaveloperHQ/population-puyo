@@ -1,0 +1,30 @@
+/* 인구 문제 카드 — 디자인 토큰 */
+:root {
+  /* 바탕 */
+  --pc-ground: #F2F3F5;
+  --pc-ink: #1A1D22;
+  --pc-ink-muted: #4A505A;
+
+  /* 선진국 면 (앞면) */
+  --pc-dev: #1F3A68;        /* 테두리·머리띠 */
+  --pc-dev-tint: #E4ECF7;   /* 면 바탕 */
+  --pc-dev-text: #14233F;   /* 본문 글자 */
+  --pc-dev-bright: #3E68AE; /* 덮개 원 */
+
+  /* 개발도상국 면 (뒷면) */
+  --pc-ing: #A85A00;
+  --pc-ing-tint: #FFEFD9;
+  --pc-ing-text: #4A2700;
+  --pc-ing-bright: #E08A1E;
+
+  /* 덮개 (시작 전) */
+  --pc-cover: #2B2F36;
+  --pc-cover-label: #C9CDD4;
+
+  /* 글꼴 */
+  --pc-font-display: 'Black Han Sans', 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
+  --pc-font-body: 'Gothic A1', 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
+
+  /* 동작 */
+  --pc-flip-ms: 300ms;
+}

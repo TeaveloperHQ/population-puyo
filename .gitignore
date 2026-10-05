@@ -1,0 +1,10 @@
+/dist/
+*.exe
+*.log
+/card-flip
+/population-puyo
+/results/
+/competitions/
+
+# 원본 학습지 사진(참고용)
+/1000041159.jpeg

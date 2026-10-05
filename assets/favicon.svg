@@ -1,0 +1,37 @@
+<svg width="1024" height="1024" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <!--
+    인구 뿌요 아이콘 — 작은 크기용(16·32·48px). gen.py 로 생성.
+    16px 에 죽방·반짝이까지 넣으면 뭉개진다. 젤리 블록 3개만 크게, 눈은 키우고 볼터치는 뺐다.
+  -->
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%"   stop-color="#6366f1"/>
+      <stop offset="50%"  stop-color="#8b5cf6"/>
+      <stop offset="100%" stop-color="#06b6d4"/>
+    </linearGradient>
+  </defs>
+
+  <rect x="112" y="112" width="800" height="800" rx="184" fill="url(#g)"/>
+
+  <g>
+    <rect x="522" y="172" width="330" height="330" rx="99" fill="#e5862a"/>
+    <rect x="522" y="172" width="330" height="297" rx="99" fill="#FFBB6B"/>
+    <ellipse cx="621" cy="251" rx="50" ry="28" fill="#ffffff" opacity="0.85" transform="rotate(-25 621 251)"/>
+    <ellipse cx="694" cy="311" rx="31" ry="42" fill="#3b3355"/>
+    <ellipse cx="779" cy="311" rx="31" ry="42" fill="#3b3355"/>
+  </g>
+  <g>
+    <rect x="172" y="522" width="330" height="330" rx="99" fill="#4f86d6"/>
+    <rect x="172" y="522" width="330" height="297" rx="99" fill="#8DBBF5"/>
+    <ellipse cx="271" cy="601" rx="50" ry="28" fill="#ffffff" opacity="0.85" transform="rotate(-25 271 601)"/>
+    <ellipse cx="344" cy="661" rx="31" ry="42" fill="#3b3355"/>
+    <ellipse cx="429" cy="661" rx="31" ry="42" fill="#3b3355"/>
+  </g>
+  <g>
+    <rect x="522" y="522" width="330" height="330" rx="99" fill="#e5862a"/>
+    <rect x="522" y="522" width="330" height="297" rx="99" fill="#FFBB6B"/>
+    <ellipse cx="621" cy="601" rx="50" ry="28" fill="#ffffff" opacity="0.85" transform="rotate(-25 621 601)"/>
+    <ellipse cx="694" cy="661" rx="31" ry="42" fill="#3b3355"/>
+    <ellipse cx="779" cy="661" rx="31" ry="42" fill="#3b3355"/>
+  </g>
+</svg>

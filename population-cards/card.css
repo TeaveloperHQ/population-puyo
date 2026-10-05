@@ -1,0 +1,92 @@
+/* 인구 문제 카드 — 컴포넌트 스타일 (tokens.css 먼저 불러올 것)
+   크기는 부모가 정한 너비에 맞춰 자동으로 비례 조정됨 (가로:세로 = 5:7) */
+
+.pc-card {
+  container-type: inline-size;
+  position: relative;
+  width: 100%;
+  aspect-ratio: 5 / 7;
+  perspective: 900px;
+  border: 0; padding: 0; background: none;
+  cursor: pointer;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+}
+.pc-card:focus-visible { outline: 3px solid var(--pc-ing-bright); outline-offset: 4px; border-radius: 9cqw; }
+
+.pc-inner {
+  position: relative; width: 100%; height: 100%;
+  transform-style: preserve-3d;
+  transition: transform var(--pc-flip-ms) ease;
+}
+/* 개발도상국 면이 위로 */
+.pc-card[data-side="ing"] .pc-inner { transform: rotateY(180deg); }
+
+.pc-face {
+  position: absolute; inset: 0;
+  box-sizing: border-box;
+  display: flex; flex-direction: column;
+  overflow: hidden;
+  border-radius: 9.3cqw;
+  border: 2cqw solid;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  font-family: var(--pc-font-body);
+}
+.pc-face--dev { background: var(--pc-dev-tint); border-color: var(--pc-dev); color: var(--pc-dev-text); }
+.pc-face--ing { background: var(--pc-ing-tint); border-color: var(--pc-ing); color: var(--pc-ing-text); transform: rotateY(180deg); }
+
+.pc-band {
+  flex: none;
+  height: 22.7cqw;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 6.7cqw;
+  color: #FFFFFF;
+  font-size: 8.7cqw; font-weight: 800;
+}
+.pc-face--dev .pc-band { background: var(--pc-dev); }
+.pc-face--ing .pc-band { background: var(--pc-ing); }
+.pc-band svg { width: 14.7cqw; height: auto; display: block; }
+
+.pc-body {
+  flex: 1;
+  display: flex; align-items: center; justify-content: center;
+  padding: 8cqw;
+  text-align: center;
+  font-size: 14.7cqw; font-weight: 800; line-height: 1.25;
+  word-break: keep-all;
+}
+/* 그림 카드: 흰 액자 */
+.pc-body--img { margin: 5.3cqw; padding: 5.3cqw; background: #FFFFFF; border-radius: 5.3cqw; }
+.pc-body--img img { max-width: 100%; max-height: 100%; object-fit: contain; display: block; }
+
+/* 덮개: data-hidden="true" 일 때 양면 위를 가림 */
+.pc-cover {
+  position: absolute; inset: 0;
+  box-sizing: border-box;
+  display: none;
+  flex-direction: column; align-items: center; justify-content: center; gap: 8cqw;
+  border-radius: 9.3cqw;
+  background-color: var(--pc-cover);
+  background-image: radial-gradient(rgba(255,255,255,.09) 1px, transparent 1px);
+  background-size: 7cqw 7cqw;
+  border: 1.8cqw solid var(--pc-ground);
+  box-shadow: 0 0 0 1.4cqw var(--pc-cover);
+}
+.pc-card[data-hidden="true"] .pc-cover { display: flex; }
+.pc-card[data-hidden="true"] { cursor: default; }
+.pc-cover-mark {
+  width: 43.6cqw; aspect-ratio: 1;
+  border-radius: 50%;
+  border: 1.8cqw solid #FFFFFF;
+  background: linear-gradient(135deg, var(--pc-dev-bright) 50%, var(--pc-ing-bright) 50%);
+  display: flex; align-items: center; justify-content: center;
+  color: #FFFFFF; font-family: var(--pc-font-display); font-size: 23.6cqw; line-height: 1;
+}
+.pc-cover-label { color: var(--pc-cover-label); font-family: var(--pc-font-body); font-size: 7.3cqw; font-weight: 700; }
+
+/* 게임 종료 후 잠금 */
+.pc-card[data-locked="true"] { cursor: default; }
+
+@media (prefers-reduced-motion: reduce) { .pc-inner { transition: none; } }
