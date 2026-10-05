@@ -600,7 +600,7 @@ function startGame(m) {
   layout();
 }
 
-const cardText = (k, face) => { const f = face === 1 ? CARDS[k].dev : CARDS[k].ing; return f.text || f.alt; };
+const cardText = (k, face) => { const f = face === 1 ? CARDS[k].dev : CARDS[k].ing; return (f.emoji ? f.emoji + ' ' : '') + f.text; };
 
 function onState(s) {
   if (!match) return;
@@ -699,7 +699,7 @@ function renderEnd(s) {
   const my = s.stats[mySide], op = s.stats[1 - mySide];
   const iWant = s.rematch[mySide], oppWant = s.rematch[1 - mySide];
   const rows = CARDS.map((c) => {
-    const t = (f) => f.text || (f.alt + ' (그림)');
+    const t = (f) => (f.emoji ? f.emoji + ' ' : '') + f.text;
     return `<tr><td class="d">${esc(t(c.dev))}</td><td class="i">${esc(t(c.ing))}</td></tr>`;
   }).join('');
   ov.innerHTML = `<div class="endcard">
@@ -759,8 +759,6 @@ addEventListener('resize', layout);
 addEventListener('orientationchange', () => setTimeout(layout, 200));
 
 // ── 블록 그림(글씨 넣은 블록을 미리 그려 둔다) ─────────────
-const imgs = {};
-for (const k of ['graph', 'poster']) { const im = new Image(); im.src = `/images/${k}.png`; im.onload = () => tileCache.clear(); imgs[k] = im; }
 const tileCache = new Map(); // `${kind}:${face}:${style}:${px}` → canvas
 const FONT = '"Jua","Malgun Gothic","Apple SD Gothic Neo","Noto Sans KR",system-ui,sans-serif';
 document.fonts?.load('20px Jua').then(() => tileCache.clear()).catch(() => {});
@@ -814,15 +812,13 @@ function tileImage(kind, face, style, scss) {
   if (fall) { c.lineWidth = Math.max(2.5, S * 0.07); c.strokeStyle = '#ff6fa8'; rrect(c, g + 1, g + 1, S - 2 * g - 2, S - 2 * g - 2, r); c.stroke(); }
   const card = CARDS[kind], content = face === 1 ? card.dev : card.ing;
   const inset = S * 0.1;
-  if (content.image) {
-    const im = imgs[content.image.includes('graph') ? 'graph' : 'poster'];
-    if (im.complete && im.naturalWidth) {
-      const bw = S - inset * 2, bh = S * 0.62, cy = S * 0.6; // 눈 아래 액자
-      const k2 = Math.min(bw / im.naturalWidth, bh / im.naturalHeight);
-      const iw = im.naturalWidth * k2, ih = im.naturalHeight * k2;
-      c.fillStyle = '#fff'; rrect(c, (S - iw) / 2 - 3, cy - ih / 2 - 3, iw + 6, ih + 6, 4); c.fill();
-      c.drawImage(im, (S - iw) / 2, cy - ih / 2, iw, ih);
-    }
+  if (content.emoji) { // 이모지 카드: 큰 이모지 + 아래 짧은 글
+    c.textAlign = 'center'; c.textBaseline = 'middle';
+    c.font = `${S * 0.34}px "Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji",sans-serif`;
+    c.fillText(content.emoji, S / 2, S * 0.5);
+    let fs = S * 0.17;
+    for (; fs > S * 0.09; fs -= S * 0.01) { c.font = `400 ${fs}px ${FONT}`; if (c.measureText(content.text).width <= S - inset * 2) break; }
+    c.fillStyle = T.fg; c.fillText(content.text, S / 2, S * 0.8);
   } else {
     const top0 = S * 0.24, maxW = S - inset * 2, maxH = S * 0.68; // 눈 아래부터
     let fs, lines;

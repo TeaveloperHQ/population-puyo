@@ -11,7 +11,7 @@
     { id: 'c02', dev: { text: '고령화' }, ing: { text: '낮은 인구부양력' } },
     { id: 'c03', dev: { text: '외국인 근로자 유입' }, ing: { text: '가족계획 실시' } },
     { id: 'c04', dev: { text: '인구 정체 및 감소' }, ing: { text: '인구 지속 증가' } },
-    { id: 'c05', dev: { image: 'images/graph.png', alt: '합계출산율 감소 그래프' }, ing: { image: 'images/poster.png', alt: '출산 억제 포스터' } },
+    { id: 'c05', dev: { emoji: '📉', text: '출산율 그래프' }, ing: { emoji: '📢', text: '출산 억제 포스터' } },
     { id: 'c06', dev: { text: '합계출산율 감소' }, ing: { text: '높은 합계출산율' } },
     { id: 'c07', dev: { text: '고령 인구 증가' }, ing: { text: '출생 성비 불균형' } },
     { id: 'c08', dev: { text: '노인 부양 비용 증가' }, ing: { text: '식량 확보 필요' } },
@@ -21,14 +21,14 @@
 
   function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
 
-  function face(side, content, imageBase) {
-    var body = content.image
-      ? '<div class="pc-body pc-body--img"><img src="' + esc((imageBase || '') + content.image) + '" alt="' + esc(content.alt || '') + '"></div>'
+  function face(side, content) {
+    var body = content.emoji
+      ? '<div class="pc-body pc-body--emoji"><span class="pc-emoji">' + content.emoji + '</span>' + esc(content.text) + '</div>'
       : '<div class="pc-body">' + esc(content.text) + '</div>';
     return '<div class="pc-face pc-face--' + side + '"><div class="pc-band"><span>' + LABEL[side] + '</span>' + ICON[side] + '</div>' + body + '</div>';
   }
 
-  /* 카드 한 장의 HTML. opts: { side:'dev'|'ing', hidden:bool, index:number, imageBase:'' } */
+  /* 카드 한 장의 HTML. opts: { side:'dev'|'ing', hidden:bool, index:number } */
   function cardHTML(card, opts) {
     opts = opts || {};
     var side = opts.side === 'ing' ? 'ing' : 'dev';
@@ -36,7 +36,7 @@
       (opts.index != null ? ' data-index="' + opts.index + '"' : '') +
       ' data-side="' + side + '" data-hidden="' + (opts.hidden ? 'true' : 'false') + '"' +
       ' aria-label="' + LABEL[side] + ' 면">' +
-      '<div class="pc-inner">' + face('dev', card.dev, opts.imageBase) + face('ing', card.ing, opts.imageBase) + '</div>' +
+      '<div class="pc-inner">' + face('dev', card.dev) + face('ing', card.ing) + '</div>' +
       '<div class="pc-cover" aria-hidden="true"><div class="pc-cover-mark">?</div><div class="pc-cover-label">인구 문제</div></div>' +
       '</button>';
   }

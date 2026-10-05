@@ -10,7 +10,6 @@
 | `cards.js` | 카드 데이터 + `PopCards.cardHTML()` 등 마크업 헬퍼 (브라우저 전역) |
 | `cards.json` | 같은 카드 데이터 (서버에서 쓸 때) |
 | `icons/` | 인구 피라미드 아이콘 2종 (`currentColor`) |
-| `images/` | 그림 카드용 이미지 2장 (c05) |
 | `preview.html` | 디자인 확인용 페이지. 브라우저로 바로 열면 됨 |
 
 글꼴: Google Fonts `Black Han Sans`(제목·덮개 ?), `Gothic A1` 500/700/800(카드).

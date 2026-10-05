@@ -88,7 +88,7 @@ CF_NO_BROWSER=1 go run .                    # 개발 실행(브라우저 자동 
 | netmedia*.go | 교사 PC 접속 주소가 무선/유선인지 판별 |
 | assets/student.html | 입장 · 로비 · 경기(캔버스, 젤리 블록) |
 | assets/host.html | 교사 화면(경기장/대회/결과) |
-| assets/cards.js · images/ · fonts/ | 카드 데이터 · 그림 카드 이미지 · 주아체 |
+| assets/cards.js · fonts/ | 카드 데이터(c05 는 이모지 카드) · 주아체 |
 | branding/ | 아이콘 원본(SVG)·생성기·PNG·ico |
 | rsrc_windows_amd64.syso | exe 아이콘 리소스(윈도우 빌드 시 자동 링크) |
 
